@@ -2,13 +2,20 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_REPO = 'elakkiya18/sample-docker'
+        DOCKERHUB_REPO = 'elakkiya18/sample-app'  // Replace with your Docker Hub username/repo
     }
 
     stages {
         stage('Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/Elakkiya1802/sample-app.git'
+            }
+        }
+
+        stage('Build React App') {
+            steps {
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
 
@@ -36,5 +43,6 @@ pipeline {
         }
     }
 }
+
 
 
